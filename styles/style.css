@@ -1,0 +1,71 @@
+@import "./reset.css";
+@import "./global.css";
+
+main {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+}
+
+.container {
+  width: min(100% - 2rem, 40rem);
+  background-color: var(--clr-secondary-200);
+
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+
+.todo--header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding-bottom: 16px;
+  border-bottom: 1px solid hsla(200, 95%, 14%, 0.2);
+}
+
+.todo--header h1 {
+  font-size: var(--fs-title);
+  font-weight: 600;
+}
+
+.wrapper {
+  margin-block-start: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.todo--input {
+  width: min(100%, 25rem);
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.todo--input::placeholder {
+  color: var(--clr-primary-500);
+  opacity: 0.5;
+}
+
+.todo--add-btn {
+  width: 40px;
+  border: none;
+  background-color: var(--clr-primary-700);
+  color: var(--clr-secondary-100);
+  cursor: pointer;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo--list {
+  background-color: var(--clr-secondary-100);
+  margin-block-start: 16px;
+  border-radius: 4px;
+  padding: 10px;
+}

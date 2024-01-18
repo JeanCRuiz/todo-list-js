@@ -1,0 +1,50 @@
+:root {
+  /* Colors */
+  --clr-primary-100: hsl(199, 64%, 73%);
+  --clr-primary-300: hsl(192, 70%, 43%);
+  --clr-primary-500: hsl(200, 95%, 14%);
+  --clr-primary-700: hsl(43, 100%, 51%);
+  --clr-primary-900: hsl(32, 100%, 49%);
+
+  --clr-secondary-100: hsl(0, 0%, 100%);
+  --clr-secondary-200: hsl(0, 13%, 91%);
+  --clr-secondary-900: hsl(0, 0%, 0%);
+
+  --fs-title: clamp(1.5rem, 1.0229rem + 2.0356vw, 2rem);
+}
+
+/* space-grotesk-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/space-grotesk-v16-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* space-grotesk-600 - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../fonts/space-grotesk-v16-latin-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+
+body {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 400;
+
+  background-color: var(--clr-primary-100);
+  color: var(--clr-primary-500);
+}
