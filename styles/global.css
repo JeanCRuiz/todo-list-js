@@ -10,6 +10,8 @@
   --clr-secondary-200: hsl(0, 13%, 91%);
   --clr-secondary-900: hsl(0, 0%, 0%);
 
+  --bg-delete-btn: hsl(0, 100%, 63%);
+
   --fs-title: clamp(1.5rem, 1.0229rem + 2.0356vw, 2rem);
 }
 
@@ -39,6 +41,28 @@
   margin: -1px;
   padding: 0;
   border: 0;
+}
+
+.flex-group-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.flex-group-2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.flex-group-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 }
 
 body {
