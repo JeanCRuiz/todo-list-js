@@ -2,23 +2,26 @@
 @import "./global.css";
 
 main {
+  --gap: 8px;
+  --border-radius: 4px;
+  --border: 1px solid hsla(200, 95%, 14%, 0.1);
+  --width-calc-1: min(100% - 2rem, 40rem);
+  --width-calc-2: min(100% - 3rem, 30rem);
+
   width: 100%;
   display: grid;
   place-items: center;
   min-height: 100dvh;
+  position: relative;
 }
 
 .container {
-  --gap: 8px;
-  --border-radius: 4px;
-  --border: 1px solid hsla(200, 95%, 14%, 0.1);
-
-  width: min(100% - 2rem, 40rem);
+  width: var(--width-calc-1);
   background-color: var(--clr-secondary-200);
 
   padding: 16px;
   border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  box-shadow: var(--clr-box-shadow);
 }
 
 .todo--header {
@@ -59,13 +62,13 @@ main {
   opacity: 0.5;
 }
 
-.todo--add-btn {
-  min-width: 30px;
-  min-height: 30px;
+.todo--add-btn,
+.modal--add-btn {
+  width: 30px;
+  height: 30px;
   border: transparent;
   background-color: var(--clr-primary-700);
 
-  cursor: pointer;
   border-radius: 50%;
 
   display: flex;
@@ -78,7 +81,7 @@ main {
   min-height: 30px;
   border: transparent;
   background-color: var(--clr-primary-700);
-  cursor: pointer;
+
   border-radius: 4px;
 
   display: flex;
@@ -142,7 +145,7 @@ main {
   min-height: 30px;
   border: transparent;
   background-color: transparent;
-  cursor: pointer;
+
   border-radius: 4px;
 
   display: flex;
@@ -168,4 +171,94 @@ main {
 /* Fondo de la barra de desplazamiento */
 ::-webkit-scrollbar-track {
   background-color: var(--clr-secondary-200);
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: hsla(0, 0%, 0%, 0.5);
+  backdrop-filter: blur(1px);
+
+  z-index: 1;
+}
+
+.modal {
+  width: var(--width-calc-2);
+  position: fixed;
+  z-index: 2;
+
+  display: grid;
+  gap: var(--gap);
+
+  background-color: var(--clr-secondary-200);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: var(--clr-box-shadow);
+}
+
+.modal--close-btn {
+  width: fit-content;
+  border: transparent;
+  background-color: transparent;
+
+  border-radius: 4px;
+  justify-self: end;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-form {
+  height: 20rem;
+  overflow-y: auto;
+}
+
+.task-form--wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.task-form--wrapper:not(:first-child, :last-child) {
+  padding-block: 10px;
+}
+
+.task-form--input,
+.task-form--textarea {
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.task-form--input::placeholder,
+.task-form--textarea::placeholder {
+  color: var(--clr-primary-500);
+  opacity: 0.5;
+}
+
+.modal--add-btn {
+  margin-right: auto;
+}
+
+.modal--cancel-btn,
+.modal--save-btn {
+  min-width: 5rem;
+  padding: 8px;
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--clr-secondary-100);
+}
+.modal--save-btn {
+  background-color: var(--clr-primary-300);
+}
+
+.modal--cancel-btn {
+  background-color: var(--clr-primary-700);
+}
+
+/* Last class */
+.hidden {
+  display: none;
 }

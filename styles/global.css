@@ -11,6 +11,7 @@
   --clr-secondary-900: hsl(0, 0%, 0%);
 
   --bg-delete-btn: hsl(0, 100%, 63%);
+  --clr-box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 
   --fs-title: clamp(1.5rem, 1.0229rem + 2.0356vw, 2rem);
 }
@@ -63,6 +64,21 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
+}
+
+.flex-group-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  gap: 8px;
+}
+
+.flex-group-5 {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
 }
 
 body {
