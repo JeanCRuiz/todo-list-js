@@ -49,7 +49,7 @@ main {
   border-bottom: var(--border);
 }
 
-.todo--input {
+.search--input {
   min-width: 82px;
   border: none;
   padding: 10px;
@@ -57,7 +57,7 @@ main {
   flex: 1;
 }
 
-.todo--input::placeholder {
+.search--input::placeholder {
   color: var(--clr-primary-500);
   opacity: 0.5;
 }
@@ -120,6 +120,14 @@ main {
   border-radius: var(--border-radius);
   padding-block: 16px;
   font-weight: 600;
+}
+
+.todo--empty-message {
+  color: var(--clr-primary-500);
+  font-size: 1.25rem;
+  opacity: 0.5;
+
+  text-align: center;
 }
 
 .todo--list-item {
