@@ -55,8 +55,8 @@ const loadTasks = (taskToLoad = tasks) => {
 
         taskElement.innerHTML = `
         <div class="flex-group-2">
-              <span>${title}</span>
-              <div class="flex-group-3">
+              <span class="item--title">${title}</span>
+              <span class="item--date">${formatDate(createdAt)}</span>
                 <button class="task--check-btn">
                  ${checked ? checkeIcon : ''}
                   <span class="visually-hidden">Select task icon</span>
@@ -77,9 +77,8 @@ const loadTasks = (taskToLoad = tasks) => {
                   </svg>
                   <span class="visually-hidden">Delete task icon</span>
                 </button>
-              </div>
-            </div>
-        `
+            </div >
+    `
 
         todoListContainer.appendChild(taskElement)
 

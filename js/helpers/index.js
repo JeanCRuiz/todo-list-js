@@ -5,7 +5,7 @@ export const uniqueId = () => {
 }
 
 export const formatDate = (date) => {
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
 
-    return date.toLocaleDateString('en-US', options)
+    return Intl.DateTimeFormat('en-us', options).format(new Date(date))
 }

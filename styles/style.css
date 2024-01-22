@@ -139,6 +139,16 @@ main {
   border-radius: 4px;
 }
 
+.item--title {
+  margin-inline-end: auto;
+}
+
+.item--date {
+  font-size: 0.75rem;
+  color: var(--clr-primary-500);
+  opacity: 0.5;
+}
+
 .task--check-btn {
   min-width: 24px;
   min-height: 24px;
