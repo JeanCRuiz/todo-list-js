@@ -12,7 +12,8 @@ const closeModalBtn = document.querySelector('.modal--close-btn')
 const taskTitle = document.querySelector('.task-form--input')
 const taskDecription = document.querySelector('.task-form--textarea')
 const addTaskBtn = document.querySelector('.modal--save-btn')
-const checkBtn = document.querySelector('.todo--check-btn')
+const cancelTaskBtn = document.querySelector('.modal--cancel-btn')
+// const checkBtn = document.querySelector('.todo--check-btn')
 
 // Check Icon
 const checkeIcon = `<svg
@@ -176,6 +177,7 @@ openModalBtn.addEventListener('click', toggleModal)
 closeModalBtn.addEventListener('click', toggleModal)
 addTaskBtn.addEventListener('click', addTask)
 searchInput.addEventListener('input', searchTask)
+cancelTaskBtn.addEventListener('click', toggleModal)
 // checkBtn.addEventListener('click', handleTasksChecked)
 
 loadTasks()
