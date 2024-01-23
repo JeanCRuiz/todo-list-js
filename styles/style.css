@@ -55,6 +55,8 @@ main {
   padding: 10px;
   border-radius: 4px;
   flex: 1;
+
+  border: 2px solid var(--clr-primary-700);
 }
 
 .search--input::placeholder {
@@ -76,11 +78,49 @@ main {
   align-items: center;
 }
 
+.options-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: calc(var(--gap) / 2);
+  position: relative;
+}
+
+.options-btns {
+  width: 10rem;
+  background-color: var(--clr-secondary-200);
+  padding: 8px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--clr-box-shadow);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+
+  position: absolute;
+  top: 35px;
+  right: 0;
+  z-index: 1;
+}
+
+.options-btns button {
+  width: 100%;
+  padding: 8px;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--clr-secondary-100);
+  color: var(--clr-primary-500);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .todo--check-btn {
   min-width: 30px;
   min-height: 30px;
   border: transparent;
-  background-color: var(--clr-primary-700);
+  border: 2px solid var(--clr-primary-700);
 
   border-radius: 4px;
 
@@ -99,16 +139,15 @@ main {
 }
 
 .todo--opt-btn {
-  min-width: 30px;
-  min-height: 30px;
   border: none;
   background-color: transparent;
-  /* cursor: pointer; */
+  cursor: pointer;
   border-radius: 4px;
 
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 4px;
 }
 
 .todo--list {
@@ -137,6 +176,13 @@ main {
   padding-inline: 10px;
   padding-block: 4px;
   border-radius: 4px;
+
+  cursor: pointer;
+  transition: opacity 0.4s ease;
+}
+
+.todo--list-item:hover {
+  opacity: 0.8;
 }
 
 .item--title {
@@ -204,6 +250,9 @@ main {
 .modal {
   width: var(--width-calc-2);
   position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
 
   display: grid;
@@ -268,6 +317,7 @@ main {
   border-radius: var(--border-radius);
   color: var(--clr-secondary-100);
 }
+
 .modal--save-btn {
   background-color: var(--clr-primary-300);
 }
@@ -279,4 +329,9 @@ main {
 /* Last class */
 .hidden {
   display: none;
+}
+
+.task-completed {
+  text-decoration: line-through;
+  opacity: 0.5;
 }

@@ -4,8 +4,21 @@ export const uniqueId = () => {
     return id
 }
 
-export const formatDate = (date) => {
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+export const formatDate = (dateSaved) => {
+    try {
+        const date = new Date(dateSaved)
 
-    return Intl.DateTimeFormat('en-us', options).format(new Date(date))
+        const options = {
+            hour: 'numeric',
+            minute: 'numeric',
+            day: 'numeric',
+            month: 'numeric',
+            year: 'numeric',
+        };
+
+        return new Intl.DateTimeFormat('en-US', options).format(date)
+
+    } catch (error) {
+        throw new Error(`El formato de fecha suministrado no es el correcto`)
+    }
 }
