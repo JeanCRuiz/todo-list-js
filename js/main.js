@@ -1,33 +1,26 @@
 import { uniqueId, formatDate } from "./helpers"
+import { checkeIcon } from './helpers/icons'
 
 
 const searchInput = document.querySelector('.search--input')
 const todoListContainer = document.querySelector('.todo--list')
 const message = document.createElement('p')
 const overlay = document.querySelector('.overlay')
-const modal = document.querySelector('.modal')
+const createTaskModal = document.querySelector('.create-task-modal')
 const openModalBtn = document.querySelector('.todo--add-btn')
-const closeModalBtn = document.querySelector('.modal--close-btn')
-const taskTitle = document.querySelector('.task-form--input')
-const taskDecription = document.querySelector('.task-form--textarea')
+const closeModalBtn = createTaskModal.querySelector('.modal--close-btn')
+const updateTaskModal = document.querySelector('.task-update-modal')
+const closeUpdateModalBtn = updateTaskModal.querySelector('.modal--close-btn')
+const taskTitle = document.querySelector('.create-input-form')
+const taskDecription = document.querySelector('.create-textarea-form')
 const addTaskBtn = document.querySelector('.modal--save-btn')
 const cancelTaskBtn = document.querySelector('.modal--cancel-btn')
-// const checkBtn = document.querySelector('.todo--check-btn')
-
-// Check Icon
-const checkeIcon = `<svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 16 16"
-    width="12"
-    height="12"
-    aria-describedby="check-icon"
-    role="img"
-    >
-    <title id="check-icon">Seletec icon</title>
-    <path
-    d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
-    ></path>
-    </svg>`;
+const checkBtn = document.querySelector('.todo--check-btn')
+const optionBtn = document.querySelector('.todo--opt-btn')
+const optionsContainer = document.querySelector('.options-btns')
+const doneOptBtn = document.querySelector('.done-opt')
+const undoneOptBtn = document.querySelector('.undone-opt')
+const deleteOptBtn = document.querySelector('.delete-opt')
 
 let tasks = localStorage.getItem('tasks') ? JSON.parse(localStorage.getItem('tasks')) : []
 
@@ -41,7 +34,7 @@ const loadTasks = (taskToLoad = tasks) => {
     if (!taskToLoad.length) {
         message.classList.add('todo--empty-message')
 
-        const messageToDisplay = searchInput.value ? `"${searchInput.value}" not found 🤨` : 'No tasks created 😔'
+        const messageToDisplay = searchInput.value ? `"${searchInput.value}" not found 🤨` : 'No tasks created 😊'
 
         message.textContent = messageToDisplay
 
@@ -54,6 +47,10 @@ const loadTasks = (taskToLoad = tasks) => {
         const taskElement = document.createElement('li')
         taskElement.setAttribute('data-id', id)
         taskElement.classList.add('todo--list-item')
+
+        if (completed) {
+            taskElement.classList.add('task-completed')
+        }
 
         taskElement.innerHTML = `
         <div class="flex-group-2">
@@ -87,6 +84,7 @@ const loadTasks = (taskToLoad = tasks) => {
         const deleteTaskBtn = taskElement.querySelectorAll('.todo--delete-btn')
         const checkTaskBtn = taskElement.querySelectorAll('.task--check-btn')
 
+        // Delete Task
         deleteTaskBtn.forEach(btn => {
             btn.addEventListener('click', () => {
                 const taskElement = btn.closest('.todo--list-item')
@@ -101,6 +99,7 @@ const loadTasks = (taskToLoad = tasks) => {
 
         })
 
+        // Check Task
         checkTaskBtn.forEach(btn => {
             btn.addEventListener('click', () => {
                 const taskElement = btn.closest('.todo--list-item')
@@ -111,15 +110,48 @@ const loadTasks = (taskToLoad = tasks) => {
                 currentTask.checked = !currentTask.checked
 
                 localStorage.setItem('tasks', JSON.stringify(tasks))
-
                 loadTasks()
 
             })
         })
 
     })
+
+    const tasksItems = document.querySelectorAll('.todo--list-item')
+
+    // Update Task
+    tasksItems.forEach(currentTask => {
+        const taskTitle = currentTask.querySelector('.item--title')
+        taskTitle.addEventListener('click', (e) => {
+            const taskTitleInput = updateTaskModal.querySelector('.update-input-form')
+            const taskDescriptionInput = updateTaskModal.querySelector('.update-textarea-form')
+            const updateTaskBtn = updateTaskModal.querySelector('.modal--save-btn')
+            const cancelUpdateTaskBtn = updateTaskModal.querySelector('.modal--cancel-btn')
+
+            toggleUpdateModal()
+
+            const taskToBeUpdated = taskToLoad.find(task => task.id === currentTask.dataset.id)
+
+            taskTitleInput.value = taskToBeUpdated.title
+            taskDescriptionInput.value = taskToBeUpdated.description
+
+            updateTaskBtn.addEventListener('click', () => {
+                if (taskTitleInput.value === '') return alert('Please enter a task title')
+
+                taskToBeUpdated.title = taskTitleInput.value
+                taskToBeUpdated.description = taskDescriptionInput.value
+
+                localStorage.setItem('tasks', JSON.stringify(taskToLoad))
+                loadTasks()
+                toggleUpdateModal()
+            })
+
+            cancelUpdateTaskBtn.addEventListener('click', toggleUpdateModal)
+        })
+    })
 }
 
+// Search Task
 const searchTask = (e) => {
     const searchValue = e.target.value.toLowerCase()
 
@@ -130,6 +162,7 @@ const searchTask = (e) => {
     loadTasks(filteredTasks)
 }
 
+// Add Task
 const addTask = () => {
 
     if (taskTitle.value === '') return alert('Please enter a task title')
@@ -153,25 +186,100 @@ const addTask = () => {
     loadTasks();
 }
 
-// const handleTasksChecked = () => {
-//     tasks.forEach(task => {
-//         if (task.checked) {
-//             checkBtn.insertAdjacentHTML('afterbegin', checkeIcon)
-//         } else {
-//         }
-//     })
-// }
+const handleTasksChecked = () => {
+    if (tasks.some(task => task.checked)) {
+        tasks.forEach(task => {
+            task.checked = false
+        })
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+        loadTasks()
+    } else if (tasks.every(task => !task.checked)) {
+        // Si no hay tareas seleccionadas Seleccionalas todas.
+        tasks.forEach(task => {
+            task.checked = true
+        })
+
+        localStorage.setItem('tasks', JSON.stringify(tasks))
+        loadTasks()
+    }
+}
 
 
 const toggleModal = () => {
-    modal.classList.toggle('hidden')
+    createTaskModal.classList.toggle('hidden')
     overlay.classList.toggle('hidden')
 
-    if (!modal.classList.contains('hidden')) {
+    if (!createTaskModal.classList.contains('hidden')) {
         taskTitle.value = ''
         taskTitle.focus()
         taskDecription.value = ''
     }
+}
+
+const toggleUpdateModal = () => {
+    updateTaskModal.classList.toggle('hidden')
+    overlay.classList.toggle('hidden')
+}
+
+const toggleShowOptions = () => {
+    optionsContainer.classList.toggle('hidden')
+}
+
+const completeMarkedTasks = () => {
+    if (!tasks.some(task => task.checked)) {
+        alert('No tasks selected')
+        toggleShowOptions()
+
+        return;
+    }
+
+    tasks.forEach(task => {
+        if (task.checked) {
+            task.completed = true
+            task.checked = false
+        }
+    })
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+    loadTasks()
+    toggleShowOptions()
+}
+
+const uncompeteMarkedTasks = () => {
+    if (!tasks.some(task => task.checked)) {
+        alert('No tasks selected')
+        toggleShowOptions()
+
+        return;
+    }
+
+    tasks.forEach(task => {
+        if (task.checked) {
+            task.completed = false
+            task.checked = false
+        }
+    })
+
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+    loadTasks()
+    toggleShowOptions()
+}
+
+const deleteMarkedTasks = () => {
+
+    if (!tasks.some(task => task.checked)) {
+        alert('No tasks selected')
+        toggleShowOptions()
+
+        return;
+    }
+
+
+    const unMarkedTasks = tasks.filter(task => !task.checked)
+    tasks = unMarkedTasks
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+    toggleShowOptions()
+    loadTasks()
 }
 
 openModalBtn.addEventListener('click', toggleModal)
@@ -179,6 +287,11 @@ closeModalBtn.addEventListener('click', toggleModal)
 addTaskBtn.addEventListener('click', addTask)
 searchInput.addEventListener('input', searchTask)
 cancelTaskBtn.addEventListener('click', toggleModal)
-// checkBtn.addEventListener('click', handleTasksChecked)
+checkBtn.addEventListener('click', handleTasksChecked)
+optionBtn.addEventListener('click', toggleShowOptions)
+doneOptBtn.addEventListener('click', completeMarkedTasks)
+undoneOptBtn.addEventListener('click', uncompeteMarkedTasks)
+deleteOptBtn.addEventListener('click', deleteMarkedTasks)
+closeUpdateModalBtn.addEventListener('click', toggleUpdateModal)
 
 loadTasks()

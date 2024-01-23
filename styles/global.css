@@ -18,19 +18,24 @@
 
 /* space-grotesk-regular - latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Space Grotesk";
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/space-grotesk-v16-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("../fonts/space-grotesk-v16-latin-regular.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
 /* space-grotesk-600 - latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: "Space Grotesk";
   font-style: normal;
   font-weight: 600;
-  src: url("../fonts/space-grotesk-v16-latin-600.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("../fonts/space-grotesk-v16-latin-600.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 .visually-hidden {
@@ -76,6 +81,13 @@
 .flex-group-5 {
   align-self: flex-end;
   display: flex;
+  align-items: center;
+  gap: var(--gap);
+}
+
+.flex-group-6 {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: var(--gap);
 }
