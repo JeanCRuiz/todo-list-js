@@ -142,8 +142,8 @@ const loadTasks = (taskToLoad = tasks) => {
                 taskToBeUpdated.description = taskDescriptionInput.value
 
                 localStorage.setItem('tasks', JSON.stringify(taskToLoad))
-                loadTasks()
                 toggleUpdateModal()
+                loadTasks()
             })
 
             cancelUpdateTaskBtn.addEventListener('click', toggleUpdateModal)
